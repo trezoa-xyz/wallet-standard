@@ -1,8 +1,8 @@
 {
     "private": true,
     "version": "0.0.0",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
-    "repository": "https://github.com/solana-labs/wallet-standard",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "repository": "https://github.com/trezoa-labs/wallet-standard",
     "license": "Apache-2.0",
     "engines": {
         "node": "22",

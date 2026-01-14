@@ -1,11 +1,11 @@
-import type { SolanaSignInInput, SolanaSignInOutput } from '@solana/wallet-standard-features';
+import type { TrezoaSignInInput, TrezoaSignInOutput } from '@trezoa/wallet-standard-features';
 import { verifyMessageSignature } from './signMessage.js';
 import { arraysEqual } from './util.js';
 
 /**
  * TODO: docs
  */
-export function verifySignIn(input: SolanaSignInInput, output: SolanaSignInOutput): boolean {
+export function verifySignIn(input: TrezoaSignInInput, output: TrezoaSignInOutput): boolean {
     const {
         signedMessage,
         signature,
@@ -20,7 +20,7 @@ export function verifySignIn(input: SolanaSignInInput, output: SolanaSignInOutpu
 /**
  * TODO: docs
  */
-export function deriveSignInMessage(input: SolanaSignInInput, output: SolanaSignInOutput): Uint8Array | null {
+export function deriveSignInMessage(input: TrezoaSignInInput, output: TrezoaSignInOutput): Uint8Array | null {
     const text = deriveSignInMessageText(input, output);
     if (!text) return null;
     return new TextEncoder().encode(text);
@@ -29,7 +29,7 @@ export function deriveSignInMessage(input: SolanaSignInInput, output: SolanaSign
 /**
  * TODO: docs
  */
-export function deriveSignInMessageText(input: SolanaSignInInput, output: SolanaSignInOutput): string | null {
+export function deriveSignInMessageText(input: TrezoaSignInInput, output: TrezoaSignInOutput): string | null {
     const parsed = parseSignInMessage(output.signedMessage);
     if (!parsed) return null;
 
@@ -55,19 +55,19 @@ export function deriveSignInMessageText(input: SolanaSignInInput, output: Solana
 /**
  * TODO: docs
  */
-export type SolanaSignInInputWithRequiredFields = SolanaSignInInput &
-    Required<Pick<SolanaSignInInput, 'domain' | 'address'>>;
+export type TrezoaSignInInputWithRequiredFields = TrezoaSignInInput &
+    Required<Pick<TrezoaSignInInput, 'domain' | 'address'>>;
 
 /**
  * TODO: docs
  */
-export function parseSignInMessage(message: Uint8Array): SolanaSignInInputWithRequiredFields | null {
+export function parseSignInMessage(message: Uint8Array): TrezoaSignInInputWithRequiredFields | null {
     const text = new TextDecoder().decode(message);
     return parseSignInMessageText(text);
 }
 
-// TODO: implement https://github.com/solana-labs/solana/blob/master/docs/src/proposals/off-chain-message-signing.md
-const DOMAIN = '(?<domain>[^\\n]+?) wants you to sign in with your Solana account:\\n';
+// TODO: implement https://github.com/trezoa-labs/trezoa/blob/master/docs/src/proposals/off-chain-message-signing.md
+const DOMAIN = '(?<domain>[^\\n]+?) wants you to sign in with your Trezoa account:\\n';
 const ADDRESS = '(?<address>[^\\n]+)(?:\\n|$)';
 const STATEMENT = '(?:\\n(?<statement>[\\S\\s]*?)(?:\\n|$))??';
 const URI = '(?:\\nURI: (?<uri>[^\\n]+))?';
@@ -85,7 +85,7 @@ const MESSAGE = new RegExp(`^${DOMAIN}${ADDRESS}${STATEMENT}${FIELDS}\\n*$`);
 /**
  * TODO: docs
  */
-export function parseSignInMessageText(text: string): SolanaSignInInputWithRequiredFields | null {
+export function parseSignInMessageText(text: string): TrezoaSignInInputWithRequiredFields | null {
     const match = MESSAGE.exec(text);
     if (!match) return null;
     const groups = match.groups;
@@ -111,7 +111,7 @@ export function parseSignInMessageText(text: string): SolanaSignInInputWithRequi
 /**
  * TODO: docs
  */
-export function createSignInMessage(input: SolanaSignInInputWithRequiredFields): Uint8Array {
+export function createSignInMessage(input: TrezoaSignInInputWithRequiredFields): Uint8Array {
     const text = createSignInMessageText(input);
     return new TextEncoder().encode(text);
 }
@@ -119,8 +119,8 @@ export function createSignInMessage(input: SolanaSignInInputWithRequiredFields):
 /**
  * TODO: docs
  */
-export function createSignInMessageText(input: SolanaSignInInputWithRequiredFields): string {
-    // ${domain} wants you to sign in with your Solana account:
+export function createSignInMessageText(input: TrezoaSignInInputWithRequiredFields): string {
+    // ${domain} wants you to sign in with your Trezoa account:
     // ${address}
     //
     // ${statement}
@@ -139,7 +139,7 @@ export function createSignInMessageText(input: SolanaSignInInputWithRequiredFiel
     // ...
     // - ${resources[n]}
 
-    let message = `${input.domain} wants you to sign in with your Solana account:\n`;
+    let message = `${input.domain} wants you to sign in with your Trezoa account:\n`;
     message += `${input.address}`;
 
     if (input.statement) {

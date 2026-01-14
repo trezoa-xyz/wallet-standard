@@ -1,5 +1,5 @@
-import { type SolanaSignInInput, type SolanaSignInOutput } from '@solana/wallet-standard-features';
-import type { PublicKey, SendOptions, Transaction, TransactionSignature, VersionedTransaction } from '@solana/web3.js';
+import { type TrezoaSignInInput, type TrezoaSignInOutput } from '@trezoa/wallet-standard-features';
+import type { PublicKey, SendOptions, Transaction, TransactionSignature, VersionedTransaction } from '@trezoa/web3.js';
 
 export interface GhostEvent {
     connect(...args: unknown[]): unknown;
@@ -23,5 +23,5 @@ export interface Ghost extends GhostEventEmitter {
     signTransaction<T extends Transaction | VersionedTransaction>(transaction: T): Promise<T>;
     signAllTransactions<T extends Transaction | VersionedTransaction>(transactions: T[]): Promise<T[]>;
     signMessage(message: Uint8Array): Promise<{ signature: Uint8Array }>;
-    signIn(input?: SolanaSignInInput): Promise<SolanaSignInOutput>;
+    signIn(input?: TrezoaSignInInput): Promise<TrezoaSignInOutput>;
 }

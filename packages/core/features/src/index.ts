@@ -1,20 +1,20 @@
 import type { WalletWithFeatures } from '@wallet-standard/base';
-import type { SolanaSignAndSendTransactionFeature } from './signAndSendTransaction.js';
-import type { SolanaSignInFeature } from './signIn.js';
-import type { SolanaSignMessageFeature } from './signMessage.js';
-import type { SolanaSignTransactionFeature } from './signTransaction.js';
-import type { SolanaSignAndSendAllTransactionsFeature } from './signAndSendAllTransactions.js';
+import type { TrezoaSignAndSendTransactionFeature } from './signAndSendTransaction.js';
+import type { TrezoaSignInFeature } from './signIn.js';
+import type { TrezoaSignMessageFeature } from './signMessage.js';
+import type { TrezoaSignTransactionFeature } from './signTransaction.js';
+import type { TrezoaSignAndSendAllTransactionsFeature } from './signAndSendAllTransactions.js';
 
 /** TODO: docs */
-export type SolanaFeatures =
-    | SolanaSignAndSendTransactionFeature
-    | SolanaSignInFeature
-    | SolanaSignMessageFeature
-    | SolanaSignTransactionFeature
-    | SolanaSignAndSendAllTransactionsFeature;
+export type TrezoaFeatures =
+    | TrezoaSignAndSendTransactionFeature
+    | TrezoaSignInFeature
+    | TrezoaSignMessageFeature
+    | TrezoaSignTransactionFeature
+    | TrezoaSignAndSendAllTransactionsFeature;
 
 /** TODO: docs */
-export type WalletWithSolanaFeatures = WalletWithFeatures<SolanaFeatures>;
+export type WalletWithTrezoaFeatures = WalletWithFeatures<TrezoaFeatures>;
 
 export * from './signAndSendTransaction.js';
 export * from './signIn.js';

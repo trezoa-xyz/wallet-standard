@@ -1,8 +1,8 @@
 {
-    "name": "@solana/wallet-standard-chains",
+    "name": "@trezoa/wallet-standard-chains",
     "version": "1.1.1",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
-    "repository": "https://github.com/solana-labs/wallet-standard",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "repository": "https://github.com/trezoa-labs/wallet-standard",
     "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"

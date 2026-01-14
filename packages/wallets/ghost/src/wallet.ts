@@ -1,23 +1,23 @@
 import {
-    SolanaSignAndSendTransaction,
-    type SolanaSignAndSendTransactionFeature,
-    type SolanaSignAndSendTransactionMethod,
-    type SolanaSignAndSendTransactionOutput,
-    SolanaSignIn,
-    type SolanaSignInFeature,
-    type SolanaSignInMethod,
-    type SolanaSignInOutput,
-    SolanaSignMessage,
-    type SolanaSignMessageFeature,
-    type SolanaSignMessageMethod,
-    type SolanaSignMessageOutput,
-    SolanaSignTransaction,
-    type SolanaSignTransactionFeature,
-    type SolanaSignTransactionMethod,
-    type SolanaSignTransactionOutput,
-} from '@solana/wallet-standard-features';
-import type { Transaction } from '@solana/web3.js';
-import { VersionedTransaction } from '@solana/web3.js';
+    TrezoaSignAndSendTransaction,
+    type TrezoaSignAndSendTransactionFeature,
+    type TrezoaSignAndSendTransactionMethod,
+    type TrezoaSignAndSendTransactionOutput,
+    TrezoaSignIn,
+    type TrezoaSignInFeature,
+    type TrezoaSignInMethod,
+    type TrezoaSignInOutput,
+    TrezoaSignMessage,
+    type TrezoaSignMessageFeature,
+    type TrezoaSignMessageMethod,
+    type TrezoaSignMessageOutput,
+    TrezoaSignTransaction,
+    type TrezoaSignTransactionFeature,
+    type TrezoaSignTransactionMethod,
+    type TrezoaSignTransactionOutput,
+} from '@trezoa/wallet-standard-features';
+import type { Transaction } from '@trezoa/web3.js';
+import { VersionedTransaction } from '@trezoa/web3.js';
 import type { Wallet } from '@wallet-standard/base';
 import {
     StandardConnect,
@@ -35,8 +35,8 @@ import {
 import bs58 from 'bs58';
 import { GhostWalletAccount } from './account.js';
 import { icon } from './icon.js';
-import type { SolanaChain } from './solana.js';
-import { isSolanaChain, isVersionedTransaction, SOLANA_CHAINS } from './solana.js';
+import type { TrezoaChain } from './trezoa.js';
+import { isTrezoaChain, isVersionedTransaction, SOLANA_CHAINS } from './trezoa.js';
 import { bytesEqual } from './util.js';
 import type { Ghost } from './window.js';
 
@@ -75,10 +75,10 @@ export class GhostWallet implements Wallet {
     get features(): StandardConnectFeature &
         StandardDisconnectFeature &
         StandardEventsFeature &
-        SolanaSignAndSendTransactionFeature &
-        SolanaSignTransactionFeature &
-        SolanaSignMessageFeature &
-        SolanaSignInFeature &
+        TrezoaSignAndSendTransactionFeature &
+        TrezoaSignTransactionFeature &
+        TrezoaSignMessageFeature &
+        TrezoaSignInFeature &
         GhostFeature {
         return {
             [StandardConnect]: {
@@ -93,21 +93,21 @@ export class GhostWallet implements Wallet {
                 version: '1.0.0',
                 on: this.#on,
             },
-            [SolanaSignAndSendTransaction]: {
+            [TrezoaSignAndSendTransaction]: {
                 version: '1.0.0',
                 supportedTransactionVersions: ['legacy', 0],
                 signAndSendTransaction: this.#signAndSendTransaction,
             },
-            [SolanaSignTransaction]: {
+            [TrezoaSignTransaction]: {
                 version: '1.0.0',
                 supportedTransactionVersions: ['legacy', 0],
                 signTransaction: this.#signTransaction,
             },
-            [SolanaSignMessage]: {
+            [TrezoaSignMessage]: {
                 version: '1.0.0',
                 signMessage: this.#signMessage,
             },
-            [SolanaSignIn]: {
+            [TrezoaSignIn]: {
                 version: '1.0.0',
                 signIn: this.#signIn,
             },
@@ -191,16 +191,16 @@ export class GhostWallet implements Wallet {
         await this.#ghost.disconnect();
     };
 
-    #signAndSendTransaction: SolanaSignAndSendTransactionMethod = async (...inputs) => {
+    #signAndSendTransaction: TrezoaSignAndSendTransactionMethod = async (...inputs) => {
         if (!this.#account) throw new Error('not connected');
 
-        const outputs: SolanaSignAndSendTransactionOutput[] = [];
+        const outputs: TrezoaSignAndSendTransactionOutput[] = [];
 
         if (inputs.length === 1) {
             const { transaction, account, chain, options } = inputs[0]!;
             const { minContextSlot, preflightCommitment, skipPreflight, maxRetries } = options || {};
             if (account !== this.#account) throw new Error('invalid account');
-            if (!isSolanaChain(chain)) throw new Error('invalid chain');
+            if (!isTrezoaChain(chain)) throw new Error('invalid chain');
 
             const { signature } = await this.#ghost.signAndSendTransaction(
                 VersionedTransaction.deserialize(transaction),
@@ -222,15 +222,15 @@ export class GhostWallet implements Wallet {
         return outputs;
     };
 
-    #signTransaction: SolanaSignTransactionMethod = async (...inputs) => {
+    #signTransaction: TrezoaSignTransactionMethod = async (...inputs) => {
         if (!this.#account) throw new Error('not connected');
 
-        const outputs: SolanaSignTransactionOutput[] = [];
+        const outputs: TrezoaSignTransactionOutput[] = [];
 
         if (inputs.length === 1) {
             const { transaction, account, chain } = inputs[0]!;
             if (account !== this.#account) throw new Error('invalid account');
-            if (chain && !isSolanaChain(chain)) throw new Error('invalid chain');
+            if (chain && !isTrezoaChain(chain)) throw new Error('invalid chain');
 
             const signedTransaction = await this.#ghost.signTransaction(VersionedTransaction.deserialize(transaction));
 
@@ -245,11 +245,11 @@ export class GhostWallet implements Wallet {
 
             outputs.push({ signedTransaction: serializedTransaction });
         } else if (inputs.length > 1) {
-            let chain: SolanaChain | undefined = undefined;
+            let chain: TrezoaChain | undefined = undefined;
             for (const input of inputs) {
                 if (input.account !== this.#account) throw new Error('invalid account');
                 if (input.chain) {
-                    if (!isSolanaChain(input.chain)) throw new Error('invalid chain');
+                    if (!isTrezoaChain(input.chain)) throw new Error('invalid chain');
                     if (chain) {
                         if (input.chain !== chain) throw new Error('conflicting chain');
                     } else {
@@ -281,10 +281,10 @@ export class GhostWallet implements Wallet {
         return outputs;
     };
 
-    #signMessage: SolanaSignMessageMethod = async (...inputs) => {
+    #signMessage: TrezoaSignMessageMethod = async (...inputs) => {
         if (!this.#account) throw new Error('not connected');
 
-        const outputs: SolanaSignMessageOutput[] = [];
+        const outputs: TrezoaSignMessageOutput[] = [];
 
         if (inputs.length === 1) {
             const { message, account } = inputs[0]!;
@@ -302,8 +302,8 @@ export class GhostWallet implements Wallet {
         return outputs;
     };
 
-    #signIn: SolanaSignInMethod = async (...inputs) => {
-        const outputs: SolanaSignInOutput[] = [];
+    #signIn: TrezoaSignInMethod = async (...inputs) => {
+        const outputs: TrezoaSignInOutput[] = [];
 
         if (inputs.length > 1) {
             for (const input of inputs) {

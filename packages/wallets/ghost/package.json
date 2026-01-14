@@ -1,9 +1,9 @@
 {
     "private": true,
-    "name": "@solana/wallet-standard-ghost",
+    "name": "@trezoa/wallet-standard-ghost",
     "version": "0.1.1",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
-    "repository": "https://github.com/solana-labs/wallet-standard",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "repository": "https://github.com/trezoa-labs/wallet-standard",
     "license": "Apache-2.0",
     "engines": {
         "node": "22"
@@ -26,8 +26,8 @@
         "build": "npm run clean && npm run tsc && npm run package"
     },
     "dependencies": {
-        "@solana/wallet-standard-features": "^1.3.0",
-        "@solana/web3.js": "^1.98.0",
+        "@trezoa/wallet-standard-features": "^1.3.0",
+        "@trezoa/web3.js": "^1.98.0",
         "@wallet-standard/base": "^1.1.0",
         "@wallet-standard/features": "^1.1.0",
         "bs58": "^6.0.0"

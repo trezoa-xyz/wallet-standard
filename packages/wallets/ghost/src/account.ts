@@ -1,15 +1,15 @@
 // This is copied with modification from @wallet-standard/wallet
 
 import {
-    SolanaSignAndSendTransaction,
-    SolanaSignMessage,
-    SolanaSignTransaction,
-} from '@solana/wallet-standard-features';
+    TrezoaSignAndSendTransaction,
+    TrezoaSignMessage,
+    TrezoaSignTransaction,
+} from '@trezoa/wallet-standard-features';
 import type { WalletAccount } from '@wallet-standard/base';
-import { SOLANA_CHAINS } from './solana.js';
+import { SOLANA_CHAINS } from './trezoa.js';
 
 const chains = SOLANA_CHAINS;
-const features = [SolanaSignAndSendTransaction, SolanaSignTransaction, SolanaSignMessage] as const;
+const features = [TrezoaSignAndSendTransaction, TrezoaSignTransaction, TrezoaSignMessage] as const;
 
 export class GhostWalletAccount implements WalletAccount {
     readonly #address: WalletAccount['address'];

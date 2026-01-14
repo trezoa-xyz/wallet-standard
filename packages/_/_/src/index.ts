@@ -1,2 +1,2 @@
-export * from '@solana/wallet-standard-core';
-export * from '@solana/wallet-standard-wallet-adapter';
+export * from '@trezoa/wallet-standard-core';
+export * from '@trezoa/wallet-standard-wallet-adapter';

@@ -1,17 +1,17 @@
 import type { IdentifierString, WalletAccount } from '@wallet-standard/base';
 
 /** Name of the feature. */
-export const SolanaSignTransaction = 'solana:signTransaction';
+export const TrezoaSignTransaction = 'trezoa:signTransaction';
 
 /** TODO: docs */
-export type SolanaSignTransactionFeature = {
+export type TrezoaSignTransactionFeature = {
     /** Name of the feature. */
-    readonly [SolanaSignTransaction]: {
+    readonly [TrezoaSignTransaction]: {
         /** Version of the feature API. */
-        readonly version: SolanaSignTransactionVersion;
+        readonly version: TrezoaSignTransactionVersion;
 
         /** TODO: docs */
-        readonly supportedTransactionVersions: readonly SolanaTransactionVersion[];
+        readonly supportedTransactionVersions: readonly TrezoaTransactionVersion[];
 
         /**
          * Sign transactions using the account's secret key.
@@ -20,23 +20,23 @@ export type SolanaSignTransactionFeature = {
          *
          * @return Outputs of signing transactions.
          */
-        readonly signTransaction: SolanaSignTransactionMethod;
+        readonly signTransaction: TrezoaSignTransactionMethod;
     };
 };
 
 /** Version of the feature. */
-export type SolanaSignTransactionVersion = '1.0.0';
+export type TrezoaSignTransactionVersion = '1.0.0';
 
 /** TODO: docs */
-export type SolanaTransactionVersion = 'legacy' | 0;
+export type TrezoaTransactionVersion = 'legacy' | 0;
 
 /** TODO: docs */
-export type SolanaSignTransactionMethod = (
-    ...inputs: readonly SolanaSignTransactionInput[]
-) => Promise<readonly SolanaSignTransactionOutput[]>;
+export type TrezoaSignTransactionMethod = (
+    ...inputs: readonly TrezoaSignTransactionInput[]
+) => Promise<readonly TrezoaSignTransactionOutput[]>;
 
 /** Input for signing a transaction. */
-export interface SolanaSignTransactionInput {
+export interface TrezoaSignTransactionInput {
     /** Account to use. */
     readonly account: WalletAccount;
 
@@ -47,11 +47,11 @@ export interface SolanaSignTransactionInput {
     readonly chain?: IdentifierString;
 
     /** TODO: docs */
-    readonly options?: SolanaSignTransactionOptions;
+    readonly options?: TrezoaSignTransactionOptions;
 }
 
 /** Output of signing a transaction. */
-export interface SolanaSignTransactionOutput {
+export interface TrezoaSignTransactionOutput {
     /**
      * Signed, serialized transaction, as raw bytes.
      * Returning a transaction rather than signatures allows multisig wallets, program wallets, and other wallets that
@@ -61,13 +61,13 @@ export interface SolanaSignTransactionOutput {
 }
 
 /** Options for signing a transaction. */
-export type SolanaSignTransactionOptions = {
+export type TrezoaSignTransactionOptions = {
     /** Preflight commitment level. */
-    readonly preflightCommitment?: SolanaTransactionCommitment;
+    readonly preflightCommitment?: TrezoaTransactionCommitment;
 
     /** The minimum slot that the request can be evaluated at. */
     readonly minContextSlot?: number;
 };
 
 /** Commitment level for transactions. */
-export type SolanaTransactionCommitment = 'processed' | 'confirmed' | 'finalized';
+export type TrezoaTransactionCommitment = 'processed' | 'confirmed' | 'finalized';

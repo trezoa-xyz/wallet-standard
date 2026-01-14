@@ -1,24 +1,24 @@
-import type { SolanaChain } from '@solana/wallet-standard-chains';
+import type { TrezoaChain } from '@trezoa/wallet-standard-chains';
 import {
     SOLANA_DEVNET_CHAIN,
     SOLANA_LOCALNET_CHAIN,
     SOLANA_MAINNET_CHAIN,
     SOLANA_TESTNET_CHAIN,
-} from '@solana/wallet-standard-chains';
+} from '@trezoa/wallet-standard-chains';
 
 /** TODO: docs */
-export const MAINNET_ENDPOINT = 'https://api.mainnet-beta.solana.com';
+export const MAINNET_ENDPOINT = 'https://api.mainnet-beta.trezoa.com';
 /** TODO: docs */
-export const DEVNET_ENDPOINT = 'https://api.devnet.solana.com';
+export const DEVNET_ENDPOINT = 'https://api.devnet.trezoa.com';
 /** TODO: docs */
-export const TESTNET_ENDPOINT = 'https://api.testnet.solana.com';
+export const TESTNET_ENDPOINT = 'https://api.testnet.trezoa.com';
 /** TODO: docs */
 export const LOCALNET_ENDPOINT = 'http://localhost:8899';
 
 /**
  * TODO: docs
  */
-export function getChainForEndpoint(endpoint: string): SolanaChain {
+export function getChainForEndpoint(endpoint: string): TrezoaChain {
     if (endpoint.includes(MAINNET_ENDPOINT)) return SOLANA_MAINNET_CHAIN;
     if (/\bdevnet\b/i.test(endpoint)) return SOLANA_DEVNET_CHAIN;
     if (/\btestnet\b/i.test(endpoint)) return SOLANA_TESTNET_CHAIN;
@@ -29,7 +29,7 @@ export function getChainForEndpoint(endpoint: string): SolanaChain {
 /**
  * TODO: docs
  */
-export function getEndpointForChain(chain: SolanaChain, endpoint?: string): string {
+export function getEndpointForChain(chain: TrezoaChain, endpoint?: string): string {
     if (endpoint) return endpoint;
     if (chain === SOLANA_MAINNET_CHAIN) return MAINNET_ENDPOINT;
     if (chain === SOLANA_DEVNET_CHAIN) return DEVNET_ENDPOINT;

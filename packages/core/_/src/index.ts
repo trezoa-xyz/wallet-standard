@@ -1,3 +1,3 @@
-export * from '@solana/wallet-standard-chains';
-export * from '@solana/wallet-standard-features';
-export * from '@solana/wallet-standard-util';
+export * from '@trezoa/wallet-standard-chains';
+export * from '@trezoa/wallet-standard-features';
+export * from '@trezoa/wallet-standard-util';

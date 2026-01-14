@@ -20,20 +20,20 @@ import {
     WalletSignInError,
     WalletSignMessageError,
     WalletSignTransactionError,
-} from '@solana/wallet-adapter-base';
+} from '@trezoa/wallet-adapter-base';
 import {
-    SolanaSignAndSendTransaction,
-    type SolanaSignAndSendTransactionFeature,
-    SolanaSignIn,
-    type SolanaSignInInput,
-    type SolanaSignInOutput,
-    SolanaSignMessage,
-    SolanaSignTransaction,
-    type SolanaSignTransactionFeature,
-} from '@solana/wallet-standard-features';
-import { getChainForEndpoint, getCommitment } from '@solana/wallet-standard-util';
-import type { Connection, TransactionSignature } from '@solana/web3.js';
-import { PublicKey, Transaction, VersionedTransaction } from '@solana/web3.js';
+    TrezoaSignAndSendTransaction,
+    type TrezoaSignAndSendTransactionFeature,
+    TrezoaSignIn,
+    type TrezoaSignInInput,
+    type TrezoaSignInOutput,
+    TrezoaSignMessage,
+    TrezoaSignTransaction,
+    type TrezoaSignTransactionFeature,
+} from '@trezoa/wallet-standard-features';
+import { getChainForEndpoint, getCommitment } from '@trezoa/wallet-standard-util';
+import type { Connection, TransactionSignature } from '@trezoa/web3.js';
+import { PublicKey, Transaction, VersionedTransaction } from '@trezoa/web3.js';
 import type { WalletAccount } from '@wallet-standard/base';
 import {
     StandardConnect,
@@ -69,7 +69,7 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
     }
 
     get url() {
-        return 'https://github.com/solana-labs/wallet-standard';
+        return 'https://github.com/trezoa-labs/wallet-standard';
     }
 
     get icon() {
@@ -200,14 +200,14 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
 
     #reset() {
         const supportedTransactionVersions =
-            SolanaSignAndSendTransaction in this.#wallet.features
-                ? this.#wallet.features[SolanaSignAndSendTransaction].supportedTransactionVersions
-                : this.#wallet.features[SolanaSignTransaction].supportedTransactionVersions;
+            TrezoaSignAndSendTransaction in this.#wallet.features
+                ? this.#wallet.features[TrezoaSignAndSendTransaction].supportedTransactionVersions
+                : this.#wallet.features[TrezoaSignTransaction].supportedTransactionVersions;
         this.#supportedTransactionVersions = arraysEqual(supportedTransactionVersions, ['legacy'])
             ? null
             : new Set(supportedTransactionVersions);
 
-        if (SolanaSignTransaction in this.#wallet.features && this.#account?.features.includes(SolanaSignTransaction)) {
+        if (TrezoaSignTransaction in this.#wallet.features && this.#account?.features.includes(TrezoaSignTransaction)) {
             this.signTransaction = this.#signTransaction;
             this.signAllTransactions = this.#signAllTransactions;
         } else {
@@ -215,13 +215,13 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
             delete this.signAllTransactions;
         }
 
-        if (SolanaSignMessage in this.#wallet.features && this.#account?.features.includes(SolanaSignMessage)) {
+        if (TrezoaSignMessage in this.#wallet.features && this.#account?.features.includes(TrezoaSignMessage)) {
             this.signMessage = this.#signMessage;
         } else {
             delete this.signMessage;
         }
 
-        if (SolanaSignIn in this.#wallet.features) {
+        if (TrezoaSignIn in this.#wallet.features) {
             this.signIn = this.#signIn;
         } else {
             delete this.signIn;
@@ -262,21 +262,21 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
             const account = this.#account;
             if (!account) throw new WalletNotConnectedError();
 
-            let feature: typeof SolanaSignAndSendTransaction | typeof SolanaSignTransaction;
-            if (SolanaSignAndSendTransaction in this.#wallet.features) {
-                if (account.features.includes(SolanaSignAndSendTransaction)) {
-                    feature = SolanaSignAndSendTransaction;
+            let feature: typeof TrezoaSignAndSendTransaction | typeof TrezoaSignTransaction;
+            if (TrezoaSignAndSendTransaction in this.#wallet.features) {
+                if (account.features.includes(TrezoaSignAndSendTransaction)) {
+                    feature = TrezoaSignAndSendTransaction;
                 } else if (
-                    SolanaSignTransaction in this.#wallet.features &&
-                    account.features.includes(SolanaSignTransaction)
+                    TrezoaSignTransaction in this.#wallet.features &&
+                    account.features.includes(TrezoaSignTransaction)
                 ) {
-                    feature = SolanaSignTransaction;
+                    feature = TrezoaSignTransaction;
                 } else {
                     throw new WalletAccountError();
                 }
-            } else if (SolanaSignTransaction in this.#wallet.features) {
-                if (!account.features.includes(SolanaSignTransaction)) throw new WalletAccountError();
-                feature = SolanaSignTransaction;
+            } else if (TrezoaSignTransaction in this.#wallet.features) {
+                if (!account.features.includes(TrezoaSignTransaction)) throw new WalletAccountError();
+                feature = TrezoaSignTransaction;
             } else {
                 throw new WalletConfigError();
             }
@@ -302,9 +302,9 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
                     );
                 }
 
-                if (feature === SolanaSignAndSendTransaction) {
-                    const [output] = await (this.#wallet.features as SolanaSignAndSendTransactionFeature)[
-                        SolanaSignAndSendTransaction
+                if (feature === TrezoaSignAndSendTransaction) {
+                    const [output] = await (this.#wallet.features as TrezoaSignAndSendTransactionFeature)[
+                        TrezoaSignAndSendTransaction
                     ].signAndSendTransaction({
                         account,
                         chain,
@@ -321,8 +321,8 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
 
                     return bs58.encode(output!.signature);
                 } else {
-                    const [output] = await (this.#wallet.features as SolanaSignTransactionFeature)[
-                        SolanaSignTransaction
+                    const [output] = await (this.#wallet.features as TrezoaSignTransactionFeature)[
+                        TrezoaSignTransaction
                     ].signTransaction({
                         account,
                         chain,
@@ -356,11 +356,11 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
             const account = this.#account;
             if (!account) throw new WalletNotConnectedError();
 
-            if (!(SolanaSignTransaction in this.#wallet.features)) throw new WalletConfigError();
-            if (!account.features.includes(SolanaSignTransaction)) throw new WalletAccountError();
+            if (!(TrezoaSignTransaction in this.#wallet.features)) throw new WalletConfigError();
+            if (!account.features.includes(TrezoaSignTransaction)) throw new WalletAccountError();
 
             try {
-                const signedTransactions = await this.#wallet.features[SolanaSignTransaction].signTransaction({
+                const signedTransactions = await this.#wallet.features[TrezoaSignTransaction].signTransaction({
                     account,
                     transaction: isVersionedTransaction(transaction)
                         ? transaction.serialize()
@@ -395,11 +395,11 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
             const account = this.#account;
             if (!account) throw new WalletNotConnectedError();
 
-            if (!(SolanaSignTransaction in this.#wallet.features)) throw new WalletConfigError();
-            if (!account.features.includes(SolanaSignTransaction)) throw new WalletAccountError();
+            if (!(TrezoaSignTransaction in this.#wallet.features)) throw new WalletConfigError();
+            if (!account.features.includes(TrezoaSignTransaction)) throw new WalletAccountError();
 
             try {
-                const signedTransactions = await this.#wallet.features[SolanaSignTransaction].signTransaction(
+                const signedTransactions = await this.#wallet.features[TrezoaSignTransaction].signTransaction(
                     ...transactions.map((transaction) => ({
                         account,
                         transaction: isVersionedTransaction(transaction)
@@ -437,11 +437,11 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
             const account = this.#account;
             if (!account) throw new WalletNotConnectedError();
 
-            if (!(SolanaSignMessage in this.#wallet.features)) throw new WalletConfigError();
-            if (!account.features.includes(SolanaSignMessage)) throw new WalletAccountError();
+            if (!(TrezoaSignMessage in this.#wallet.features)) throw new WalletConfigError();
+            if (!account.features.includes(TrezoaSignMessage)) throw new WalletAccountError();
 
             try {
-                const signedMessages = await this.#wallet.features[SolanaSignMessage].signMessage({
+                const signedMessages = await this.#wallet.features[TrezoaSignMessage].signMessage({
                     account,
                     message,
                 });
@@ -456,14 +456,14 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
         }
     }
 
-    signIn: ((input?: SolanaSignInInput) => Promise<SolanaSignInOutput>) | undefined;
-    async #signIn(input: SolanaSignInInput = {}): Promise<SolanaSignInOutput> {
+    signIn: ((input?: TrezoaSignInInput) => Promise<TrezoaSignInOutput>) | undefined;
+    async #signIn(input: TrezoaSignInInput = {}): Promise<TrezoaSignInOutput> {
         try {
-            if (!(SolanaSignIn in this.#wallet.features)) throw new WalletConfigError();
+            if (!(TrezoaSignIn in this.#wallet.features)) throw new WalletConfigError();
 
-            let output: SolanaSignInOutput | undefined;
+            let output: TrezoaSignInOutput | undefined;
             try {
-                [output] = await this.#wallet.features[SolanaSignIn].signIn(input);
+                [output] = await this.#wallet.features[TrezoaSignIn].signIn(input);
             } catch (error: any) {
                 throw new WalletSignInError(error?.message, error);
             }

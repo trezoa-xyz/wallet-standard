@@ -7,13 +7,13 @@ This guide is for wallets that want to implement the Wallet Standard. This can b
 
 These methods are similar, but since wallets that exist today already have their own APIs, we'll focus on the latter.
 
-Take a look at the [reference implementation](https://github.com/solana-labs/wallet-standard/tree/master/packages/wallets/ghost) for our imaginary wallet, **Ghost**.
+Take a look at the [reference implementation](https://github.com/trezoa-labs/wallet-standard/tree/master/packages/wallets/ghost) for our imaginary wallet, **Ghost**.
 
-Ghost has an API very similar to Phantom's. Because many Solana wallets have a similar API, it should be simple to modify.
+Ghost has an API very similar to Phantom's. Because many Trezoa wallets have a similar API, it should be simple to modify.
 
 ## 1. Make a copy
 ```shell
-git clone https://github.com/solana-labs/wallet-standard --depth=1
+git clone https://github.com/trezoa-labs/wallet-standard --depth=1
 cp -R wallet-standard/packages/wallets/ghost ghost
 ```
 
@@ -43,7 +43,7 @@ export MY_WALLET_PACKAGE_NAME='unique-new-york'
 mv ghost $MY_WALLET_PACKAGE_NAME
 cd $MY_WALLET_PACKAGE_NAME
 
-find . -name "package.json" -type f -exec sed -i '' "s/@solana\/wallet-standard-ghost/${MY_WALLET_PACKAGE_NAME}-standard-wallet/g" {} +
+find . -name "package.json" -type f -exec sed -i '' "s/@trezoa\/wallet-standard-ghost/${MY_WALLET_PACKAGE_NAME}-standard-wallet/g" {} +
 find src -type f -exec sed -i '' "s/'Ghost'/'${MY_WALLET_NAME}'/g" {} +
 find src -type f -exec sed -i '' "s/Ghost/${MY_WALLET_CLASS_NAME}/g" {} +
 find src -type f -exec sed -i '' "s/ghost/${MY_WALLET_VARIABLE_NAME}/g" {} +
@@ -57,8 +57,8 @@ The package is marked private since it doesn't need to be published on npm. It w
 If you want to customize the package name or metadata, open the `package.json` file and change these lines however you like.
 ```json
     "name": "unique-new-york-standard-wallet",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
-    "repository": "https://github.com/solana-labs/wallet-standard",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "repository": "https://github.com/trezoa-labs/wallet-standard",
 ```
 
 ## 5. Install dependencies
@@ -105,7 +105,7 @@ If your wallet has a different API or events, open the `src/window.ts` file and 
 
 If your wallet doesn't support versioned transactions, you should add support for them to your wallet rather than change the API in `src/wallet.ts`.
 
-Ideally, you should support all Solana clusters. If your wallet doesn't, open the `src/solana.ts` file. You can remove any you don't support, and remove them from the `SOLANA_CHAINS` constant.
+Ideally, you should support all Trezoa clusters. If your wallet doesn't, open the `src/trezoa.ts` file. You can remove any you don't support, and remove them from the `TREZOA_CHAINS` constant.
 
 ```shell
 npm run build
@@ -148,16 +148,16 @@ catch (error) {
 
 Your wallet now implements the Wallet Standard and registers itself on the window. This is all dapps need to detect and use it.
 
-Even if another wallet uses "your" namespace (e.g. `window.solana`), the Standard Wallet you registered will work correctly.
+Even if another wallet uses "your" namespace (e.g. `window.trezoa`), the Standard Wallet you registered will work correctly.
 
 ## 10. Test your wallet
 
-Open the Wallet Adapter demo https://solana-labs.github.io/wallet-adapter/example/ to test your wallet.
+Open the Wallet Adapter demo https://trezoa-labs.github.io/wallet-adapter/example/ to test your wallet.
 
 If your wallet implements the Wallet Standard, it will be detected by this example dapp.
 
 ## Appendix: Reference implementations
 
-- [Ghost](https://github.com/solana-labs/wallet-standard/tree/master/packages/wallets/ghost)
+- [Ghost](https://github.com/trezoa-labs/wallet-standard/tree/master/packages/wallets/ghost)
 - [Glow](https://github.com/glow-xyz/glow-js/tree/master/packages/wallet-standard) (owned by `glow-xyz` org)
 - [Backpack](https://github.com/coral-xyz/backpack/tree/master/packages/wallet-standard) (owned by `coral-xyz` org)

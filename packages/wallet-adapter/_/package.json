@@ -1,8 +1,8 @@
 {
-    "name": "@solana/wallet-standard-wallet-adapter",
+    "name": "@trezoa/wallet-standard-wallet-adapter",
     "version": "1.1.4",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
-    "repository": "https://github.com/solana-labs/wallet-standard",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "repository": "https://github.com/trezoa-labs/wallet-standard",
     "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"
@@ -30,8 +30,8 @@
         "package": "shx mkdir -p lib/cjs && shx echo '{ \"type\": \"commonjs\" }' > lib/cjs/package.json"
     },
     "dependencies": {
-        "@solana/wallet-standard-wallet-adapter-base": "workspace:^",
-        "@solana/wallet-standard-wallet-adapter-react": "workspace:^"
+        "@trezoa/wallet-standard-wallet-adapter-base": "workspace:^",
+        "@trezoa/wallet-standard-wallet-adapter-react": "workspace:^"
     },
     "devDependencies": {
         "shx": "^0.4.0"

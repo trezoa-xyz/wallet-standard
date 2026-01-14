@@ -1,4 +1,4 @@
-# @solana/wallet-standard-chains
+# @trezoa/wallet-standard-chains
 
 ## 1.1.1
 
@@ -10,7 +10,7 @@
 
 ### Minor Changes
 
-- f10d202: Add `solana:signIn` (Sign In With Solana) feature
+- f10d202: Add `trezoa:signIn` (Sign In With Trezoa) feature
 
 ## 1.0.0
 

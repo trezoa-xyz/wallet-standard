@@ -1,10 +1,10 @@
-# @solana/wallet-standard-features
+# @trezoa/wallet-standard-features
 
 ## 1.3.0
 
 ### Minor Changes
 
-- 013d501: Add solana:signAndSendAllTransactions feature
+- 013d501: Add trezoa:signAndSendAllTransactions feature
 
 ### Patch Changes
 
@@ -20,13 +20,13 @@
 
 ### Minor Changes
 
-- f10d202: Add `solana:signIn` (Sign In With Solana) feature
+- f10d202: Add `trezoa:signIn` (Sign In With Trezoa) feature
 
 ## 1.0.1
 
 ### Patch Changes
 
-- 9be9ef3: Use latest @solana/wallet-adapter-base, export reusable feature names
+- 9be9ef3: Use latest @trezoa/wallet-adapter-base, export reusable feature names
 
 ## 1.0.0
 

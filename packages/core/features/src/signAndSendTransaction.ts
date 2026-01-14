@@ -1,23 +1,23 @@
 import type { IdentifierString } from '@wallet-standard/base';
 import type {
-    SolanaSignTransactionInput,
-    SolanaSignTransactionOptions,
-    SolanaTransactionCommitment,
-    SolanaTransactionVersion,
+    TrezoaSignTransactionInput,
+    TrezoaSignTransactionOptions,
+    TrezoaTransactionCommitment,
+    TrezoaTransactionVersion,
 } from './signTransaction.js';
 
 /** Name of the feature. */
-export const SolanaSignAndSendTransaction = 'solana:signAndSendTransaction';
+export const TrezoaSignAndSendTransaction = 'trezoa:signAndSendTransaction';
 
 /** TODO: docs */
-export type SolanaSignAndSendTransactionFeature = {
+export type TrezoaSignAndSendTransactionFeature = {
     /** Name of the feature. */
-    readonly [SolanaSignAndSendTransaction]: {
+    readonly [TrezoaSignAndSendTransaction]: {
         /** Version of the feature API. */
-        readonly version: SolanaSignAndSendTransactionVersion;
+        readonly version: TrezoaSignAndSendTransactionVersion;
 
         /** TODO: docs */
-        readonly supportedTransactionVersions: readonly SolanaTransactionVersion[];
+        readonly supportedTransactionVersions: readonly TrezoaTransactionVersion[];
 
         /**
          * Sign transactions using the account's secret key and send them to the chain.
@@ -26,37 +26,37 @@ export type SolanaSignAndSendTransactionFeature = {
          *
          * @return Outputs of signing and sending transactions.
          */
-        readonly signAndSendTransaction: SolanaSignAndSendTransactionMethod;
+        readonly signAndSendTransaction: TrezoaSignAndSendTransactionMethod;
     };
 };
 
 /** Version of the feature. */
-export type SolanaSignAndSendTransactionVersion = '1.0.0';
+export type TrezoaSignAndSendTransactionVersion = '1.0.0';
 
 /** TODO: docs */
-export type SolanaSignAndSendTransactionMethod = (
-    ...inputs: readonly SolanaSignAndSendTransactionInput[]
-) => Promise<readonly SolanaSignAndSendTransactionOutput[]>;
+export type TrezoaSignAndSendTransactionMethod = (
+    ...inputs: readonly TrezoaSignAndSendTransactionInput[]
+) => Promise<readonly TrezoaSignAndSendTransactionOutput[]>;
 
 /** Input for signing and sending a transaction. */
-export interface SolanaSignAndSendTransactionInput extends SolanaSignTransactionInput {
+export interface TrezoaSignAndSendTransactionInput extends TrezoaSignTransactionInput {
     /** Chain to use. */
     readonly chain: IdentifierString;
 
     /** TODO: docs */
-    readonly options?: SolanaSignAndSendTransactionOptions;
+    readonly options?: TrezoaSignAndSendTransactionOptions;
 }
 
 /** Output of signing and sending a transaction. */
-export interface SolanaSignAndSendTransactionOutput {
+export interface TrezoaSignAndSendTransactionOutput {
     /** Transaction signature, as raw bytes. */
     readonly signature: Uint8Array;
 }
 
 /** Options for signing and sending a transaction. */
-export type SolanaSignAndSendTransactionOptions = SolanaSignTransactionOptions & {
+export type TrezoaSignAndSendTransactionOptions = TrezoaSignTransactionOptions & {
     /** Desired commitment level. If provided, confirm the transaction after sending. */
-    readonly commitment?: SolanaTransactionCommitment;
+    readonly commitment?: TrezoaTransactionCommitment;
 
     /** Disable transaction verification at the RPC. */
     readonly skipPreflight?: boolean;

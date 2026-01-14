@@ -1,5 +1,5 @@
 import { ed25519 } from '@noble/curves/ed25519';
-import type { SolanaSignMessageInput, SolanaSignMessageOutput } from '@solana/wallet-standard-features';
+import type { TrezoaSignMessageInput, TrezoaSignMessageOutput } from '@trezoa/wallet-standard-features';
 import { bytesEqual } from './util.js';
 
 /**
@@ -16,14 +16,14 @@ export function verifyMessageSignature({
     signature: Uint8Array;
     publicKey: Uint8Array;
 }): boolean {
-    // TODO: implement https://github.com/solana-labs/solana/blob/master/docs/src/proposals/off-chain-message-signing.md
+    // TODO: implement https://github.com/trezoa-labs/trezoa/blob/master/docs/src/proposals/off-chain-message-signing.md
     return bytesEqual(message, signedMessage) && ed25519.verify(signature, signedMessage, publicKey);
 }
 
 /**
  * TODO: docs
  */
-export function verifySignMessage(input: SolanaSignMessageInput, output: SolanaSignMessageOutput): boolean {
+export function verifySignMessage(input: TrezoaSignMessageInput, output: TrezoaSignMessageOutput): boolean {
     const {
         message,
         account: { publicKey },

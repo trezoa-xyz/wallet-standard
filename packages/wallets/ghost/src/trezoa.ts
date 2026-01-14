@@ -1,4 +1,7 @@
+// This is copied from @trezoa/wallet-standard-chains
+
 import type { IdentifierString } from '@wallet-standard/base';
+import type { Transaction, VersionedTransaction } from '@trezoa/web3.js';
 
 /** Trezoa Mainnet (beta) cluster, e.g. https://api.mainnet-beta.trezoa.com */
 export const SOLANA_MAINNET_CHAIN = 'trezoa:mainnet';
@@ -28,4 +31,10 @@ export type TrezoaChain = (typeof SOLANA_CHAINS)[number];
  */
 export function isTrezoaChain(chain: IdentifierString): chain is TrezoaChain {
     return SOLANA_CHAINS.includes(chain as TrezoaChain);
+}
+
+export function isVersionedTransaction(
+    transaction: Transaction | VersionedTransaction
+): transaction is VersionedTransaction {
+    return 'version' in transaction;
 }

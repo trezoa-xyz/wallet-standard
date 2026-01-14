@@ -11,52 +11,52 @@ import {
 const signInMessageTests = {
     'with `domain` and `address`': {
         parsed: {
-            domain: 'solana.com',
+            domain: 'trezoa.com',
             address: 'A',
         },
-        text: 'solana.com wants you to sign in with your Solana account:\nA',
+        text: 'trezoa.com wants you to sign in with your Trezoa account:\nA',
     },
     'with `statement`': {
         parsed: {
-            domain: 'solana.com',
+            domain: 'trezoa.com',
             address: 'A',
             statement: 'S',
         },
-        text: 'solana.com wants you to sign in with your Solana account:\nA\n\nS',
+        text: 'trezoa.com wants you to sign in with your Trezoa account:\nA\n\nS',
     },
     'with multi-line `statement`': {
         parsed: {
-            domain: 'solana.com',
+            domain: 'trezoa.com',
             address: 'A',
             statement: 'S\n\nS',
         },
-        text: 'solana.com wants you to sign in with your Solana account:\nA\n\nS\n\nS',
+        text: 'trezoa.com wants you to sign in with your Trezoa account:\nA\n\nS\n\nS',
     },
     'with fields': {
         parsed: {
-            domain: 'solana.com',
+            domain: 'trezoa.com',
             address: 'A',
-            uri: 'https://solana.com',
+            uri: 'https://trezoa.com',
         },
-        text: 'solana.com wants you to sign in with your Solana account:\nA\n\nURI: https://solana.com',
+        text: 'trezoa.com wants you to sign in with your Trezoa account:\nA\n\nURI: https://trezoa.com',
     },
     'with `statement` and fields': {
         parsed: {
-            domain: 'solana.com',
+            domain: 'trezoa.com',
             address: 'A',
             statement: 'S',
-            uri: 'https://solana.com',
+            uri: 'https://trezoa.com',
         },
-        text: 'solana.com wants you to sign in with your Solana account:\nA\n\nS\n\nURI: https://solana.com',
+        text: 'trezoa.com wants you to sign in with your Trezoa account:\nA\n\nS\n\nURI: https://trezoa.com',
     },
     'with multi-line `statement` and fields': {
         parsed: {
-            domain: 'solana.com',
+            domain: 'trezoa.com',
             address: 'A',
             statement: 'S\n\nS',
-            uri: 'https://solana.com',
+            uri: 'https://trezoa.com',
         },
-        text: 'solana.com wants you to sign in with your Solana account:\nA\n\nS\n\nS\n\nURI: https://solana.com',
+        text: 'trezoa.com wants you to sign in with your Trezoa account:\nA\n\nS\n\nS\n\nURI: https://trezoa.com',
     },
 };
 

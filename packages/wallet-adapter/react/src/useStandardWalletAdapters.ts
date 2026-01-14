@@ -1,5 +1,5 @@
-import type { Adapter, WalletName } from '@solana/wallet-adapter-base';
-import { isWalletAdapterCompatibleWallet, StandardWalletAdapter } from '@solana/wallet-standard-wallet-adapter-base';
+import type { Adapter, WalletName } from '@trezoa/wallet-adapter-base';
+import { isWalletAdapterCompatibleWallet, StandardWalletAdapter } from '@trezoa/wallet-standard-wallet-adapter-base';
 import { DEPRECATED_getWallets } from '@wallet-standard/app';
 import type { Wallet } from '@wallet-standard/base';
 import { useEffect, useMemo, useRef, useState } from 'react';

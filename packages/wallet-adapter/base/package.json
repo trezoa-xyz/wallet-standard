@@ -1,8 +1,8 @@
 {
-    "name": "@solana/wallet-standard-wallet-adapter-base",
+    "name": "@trezoa/wallet-standard-wallet-adapter-base",
     "version": "1.1.4",
-    "author": "Solana Maintainers <maintainers@solana.foundation>",
-    "repository": "https://github.com/solana-labs/wallet-standard",
+    "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
+    "repository": "https://github.com/trezoa-labs/wallet-standard",
     "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"
@@ -30,21 +30,21 @@
         "package": "shx mkdir -p lib/cjs && shx echo '{ \"type\": \"commonjs\" }' > lib/cjs/package.json"
     },
     "peerDependencies": {
-        "@solana/web3.js": "^1.98.0",
+        "@trezoa/web3.js": "^1.98.0",
         "bs58": "^6.0.0"
     },
     "dependencies": {
-        "@solana/wallet-adapter-base": "^0.9.24",
-        "@solana/wallet-standard-chains": "workspace:^",
-        "@solana/wallet-standard-features": "workspace:^",
-        "@solana/wallet-standard-util": "workspace:^",
+        "@trezoa/wallet-adapter-base": "^0.9.24",
+        "@trezoa/wallet-standard-chains": "workspace:^",
+        "@trezoa/wallet-standard-features": "workspace:^",
+        "@trezoa/wallet-standard-util": "workspace:^",
         "@wallet-standard/app": "^1.1.0",
         "@wallet-standard/base": "^1.1.0",
         "@wallet-standard/features": "^1.1.0",
         "@wallet-standard/wallet": "^1.1.0"
     },
     "devDependencies": {
-        "@solana/web3.js": "^1.98.0",
+        "@trezoa/web3.js": "^1.98.0",
         "bs58": "^6.0.0",
         "shx": "^0.3.4"
     }
