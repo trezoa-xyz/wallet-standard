@@ -6,9 +6,9 @@ import {
     TrezoaSignTransaction,
 } from '@trezoa/wallet-standard-features';
 import type { WalletAccount } from '@wallet-standard/base';
-import { SOLANA_CHAINS } from './trezoa.js';
+import { trezoa_CHAINS } from './trezoa.js';
 
-const chains = SOLANA_CHAINS;
+const chains = trezoa_CHAINS;
 const features = [TrezoaSignAndSendTransaction, TrezoaSignTransaction, TrezoaSignMessage] as const;
 
 export class GhostWalletAccount implements WalletAccount {

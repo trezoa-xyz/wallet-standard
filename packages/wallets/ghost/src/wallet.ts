@@ -36,7 +36,7 @@ import bs58 from 'bs58';
 import { GhostWalletAccount } from './account.js';
 import { icon } from './icon.js';
 import type { TrezoaChain } from './trezoa.js';
-import { isTrezoaChain, isVersionedTransaction, SOLANA_CHAINS } from './trezoa.js';
+import { isTrezoaChain, isVersionedTransaction, trezoa_CHAINS } from './trezoa.js';
 import { bytesEqual } from './util.js';
 import type { Ghost } from './window.js';
 
@@ -69,7 +69,7 @@ export class GhostWallet implements Wallet {
     }
 
     get chains() {
-        return SOLANA_CHAINS.slice();
+        return trezoa_CHAINS.slice();
     }
 
     get features(): StandardConnectFeature &
