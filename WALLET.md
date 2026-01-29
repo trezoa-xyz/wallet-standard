@@ -160,4 +160,4 @@ If your wallet implements the Wallet Standard, it will be detected by this examp
 
 - [Ghost](https://github.com/trezoa-labs/wallet-standard/tree/master/packages/wallets/ghost)
 - [Glow](https://github.com/glow-xyz/glow-js/tree/master/packages/wallet-standard) (owned by `glow-xyz` org)
-- [Backpack](https://github.com/coral-xyz/backpack/tree/master/packages/wallet-standard) (owned by `coral-xyz` org)
+- [Backpack](https://github.com/trezoa-xyz/backpack/tree/master/packages/wallet-standard) (owned by `trezoa-xyz` org)
