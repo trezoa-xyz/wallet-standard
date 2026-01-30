@@ -66,7 +66,7 @@ export function parseSignInMessage(message: Uint8Array): TrezoaSignInInputWithRe
     return parseSignInMessageText(text);
 }
 
-// TODO: implement https://github.com/trezoa-labs/trezoa/blob/master/docs/src/proposals/off-chain-message-signing.md
+// TODO: implement https://github.com/trezoa-team/trezoa/blob/master/docs/src/proposals/off-chain-message-signing.md
 const DOMAIN = '(?<domain>[^\\n]+?) wants you to sign in with your Trezoa account:\\n';
 const ADDRESS = '(?<address>[^\\n]+)(?:\\n|$)';
 const STATEMENT = '(?:\\n(?<statement>[\\S\\s]*?)(?:\\n|$))??';

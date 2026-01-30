@@ -16,7 +16,7 @@ export function verifyMessageSignature({
     signature: Uint8Array;
     publicKey: Uint8Array;
 }): boolean {
-    // TODO: implement https://github.com/trezoa-labs/trezoa/blob/master/docs/src/proposals/off-chain-message-signing.md
+    // TODO: implement https://github.com/trezoa-team/trezoa/blob/master/docs/src/proposals/off-chain-message-signing.md
     return bytesEqual(message, signedMessage) && ed25519.verify(signature, signedMessage, publicKey);
 }
 

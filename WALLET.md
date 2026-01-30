@@ -7,13 +7,13 @@ This guide is for wallets that want to implement the Wallet Standard. This can b
 
 These methods are similar, but since wallets that exist today already have their own APIs, we'll focus on the latter.
 
-Take a look at the [reference implementation](https://github.com/trezoa-labs/wallet-standard/tree/master/packages/wallets/ghost) for our imaginary wallet, **Ghost**.
+Take a look at the [reference implementation](https://github.com/trezoa-team/wallet-standard/tree/master/packages/wallets/ghost) for our imaginary wallet, **Ghost**.
 
 Ghost has an API very similar to Phantom's. Because many Trezoa wallets have a similar API, it should be simple to modify.
 
 ## 1. Make a copy
 ```shell
-git clone https://github.com/trezoa-labs/wallet-standard --depth=1
+git clone https://github.com/trezoa-team/wallet-standard --depth=1
 cp -R wallet-standard/packages/wallets/ghost ghost
 ```
 
@@ -58,7 +58,7 @@ If you want to customize the package name or metadata, open the `package.json` f
 ```json
     "name": "unique-new-york-standard-wallet",
     "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
-    "repository": "https://github.com/trezoa-labs/wallet-standard",
+    "repository": "https://github.com/trezoa-team/wallet-standard",
 ```
 
 ## 5. Install dependencies
@@ -152,12 +152,12 @@ Even if another wallet uses "your" namespace (e.g. `window.trezoa`), the Standar
 
 ## 10. Test your wallet
 
-Open the Wallet Adapter demo https://trezoa-labs.github.io/wallet-adapter/example/ to test your wallet.
+Open the Wallet Adapter demo https://trezoa-team.github.io/wallet-adapter/example/ to test your wallet.
 
 If your wallet implements the Wallet Standard, it will be detected by this example dapp.
 
 ## Appendix: Reference implementations
 
-- [Ghost](https://github.com/trezoa-labs/wallet-standard/tree/master/packages/wallets/ghost)
+- [Ghost](https://github.com/trezoa-team/wallet-standard/tree/master/packages/wallets/ghost)
 - [Glow](https://github.com/glow-xyz/glow-js/tree/master/packages/wallet-standard) (owned by `glow-xyz` org)
 - [Backpack](https://github.com/trezoa-xyz/backpack/tree/master/packages/wallet-standard) (owned by `trezoa-xyz` org)

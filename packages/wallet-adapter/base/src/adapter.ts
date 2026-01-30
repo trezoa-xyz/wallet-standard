@@ -69,7 +69,7 @@ export class StandardWalletAdapter extends BaseWalletAdapter implements Standard
     }
 
     get url() {
-        return 'https://github.com/trezoa-labs/wallet-standard';
+        return 'https://github.com/trezoa-team/wallet-standard';
     }
 
     get icon() {

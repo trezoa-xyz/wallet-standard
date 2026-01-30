@@ -2,7 +2,7 @@
     "name": "@trezoa/wallet-standard-wallet-adapter",
     "version": "1.1.4",
     "author": "Trezoa Maintainers <maintainers@trezoa.foundation>",
-    "repository": "https://github.com/trezoa-labs/wallet-standard",
+    "repository": "https://github.com/trezoa-team/wallet-standard",
     "license": "Apache-2.0",
     "publishConfig": {
         "access": "public"
